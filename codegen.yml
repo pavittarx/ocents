@@ -1,5 +1,7 @@
 overwrite: true
-schema: "src/graphql/schema.ts"
+schema: 
+- "scalars.js"
+- "src/graphql/schema.ts"
 documents: null
 generates:
   src/graphql/tsdefs.ts:

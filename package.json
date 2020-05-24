@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo 'No tests available.'",
     "build": "graphql-codegen --config codegen.yml && tsc",
-    "dev": "ts-node-dev src/index",
+    "dev": "ts-node-dev --no-notify src/index",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "repository": {
@@ -44,6 +44,7 @@
     "express": "^4.17.1",
     "graphql": "^15.0.0",
     "graphql-import": "^1.0.2",
+    "graphql-scalars": "^1.1.2",
     "graphql-tools": "^6.0.0"
   }
 }

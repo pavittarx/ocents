@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -7,7 +7,75 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
+  EmailAddress: any;
+  NegativeFloat: any;
+  NegativeInt: any;
+  NonNegativeFloat: any;
+  NonNegativeInt: any;
+  NonPositiveFloat: any;
+  NonPositiveInt: any;
+  PhoneNumber: any;
+  PositiveFloat: any;
+  PositiveInt: any;
+  PostalCode: any;
+  UnsignedFloat: any;
+  UnsignedInt: any;
+  URL: any;
+  BigInt: any;
+  Long: any;
+  GUID: any;
+  Hexadecimal: any;
+  HexColorCode: any;
+  HSL: any;
+  HSLA: any;
+  IPv4: any;
+  IPv6: any;
+  ISBN: any;
+  MAC: any;
+  Port: any;
+  RGB: any;
+  RGBA: any;
+  USCurrency: any;
+  JSON: any;
+  JSONObject: any;
+  IBAN: any;
+  ObjectID: any;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export type Query = {
   __typename?: 'Query';
@@ -18,7 +86,7 @@ export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
   name: Scalars['String'];
-  email: Scalars['String'];
+  email: Scalars['EmailAddress'];
   mobile?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
   about?: Maybe<Scalars['String']>;
@@ -99,6 +167,40 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
+  NegativeFloat: ResolverTypeWrapper<Scalars['NegativeFloat']>;
+  NegativeInt: ResolverTypeWrapper<Scalars['NegativeInt']>;
+  NonNegativeFloat: ResolverTypeWrapper<Scalars['NonNegativeFloat']>;
+  NonNegativeInt: ResolverTypeWrapper<Scalars['NonNegativeInt']>;
+  NonPositiveFloat: ResolverTypeWrapper<Scalars['NonPositiveFloat']>;
+  NonPositiveInt: ResolverTypeWrapper<Scalars['NonPositiveInt']>;
+  PhoneNumber: ResolverTypeWrapper<Scalars['PhoneNumber']>;
+  PositiveFloat: ResolverTypeWrapper<Scalars['PositiveFloat']>;
+  PositiveInt: ResolverTypeWrapper<Scalars['PositiveInt']>;
+  PostalCode: ResolverTypeWrapper<Scalars['PostalCode']>;
+  UnsignedFloat: ResolverTypeWrapper<Scalars['UnsignedFloat']>;
+  UnsignedInt: ResolverTypeWrapper<Scalars['UnsignedInt']>;
+  URL: ResolverTypeWrapper<Scalars['URL']>;
+  BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
+  Long: ResolverTypeWrapper<Scalars['Long']>;
+  GUID: ResolverTypeWrapper<Scalars['GUID']>;
+  Hexadecimal: ResolverTypeWrapper<Scalars['Hexadecimal']>;
+  HexColorCode: ResolverTypeWrapper<Scalars['HexColorCode']>;
+  HSL: ResolverTypeWrapper<Scalars['HSL']>;
+  HSLA: ResolverTypeWrapper<Scalars['HSLA']>;
+  IPv4: ResolverTypeWrapper<Scalars['IPv4']>;
+  IPv6: ResolverTypeWrapper<Scalars['IPv6']>;
+  ISBN: ResolverTypeWrapper<Scalars['ISBN']>;
+  MAC: ResolverTypeWrapper<Scalars['MAC']>;
+  Port: ResolverTypeWrapper<Scalars['Port']>;
+  RGB: ResolverTypeWrapper<Scalars['RGB']>;
+  RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
+  USCurrency: ResolverTypeWrapper<Scalars['USCurrency']>;
+  JSON: ResolverTypeWrapper<Scalars['JSON']>;
+  JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
+  IBAN: ResolverTypeWrapper<Scalars['IBAN']>;
+  ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
   Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -108,10 +210,180 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
+  DateTime: Scalars['DateTime'];
+  EmailAddress: Scalars['EmailAddress'];
+  NegativeFloat: Scalars['NegativeFloat'];
+  NegativeInt: Scalars['NegativeInt'];
+  NonNegativeFloat: Scalars['NonNegativeFloat'];
+  NonNegativeInt: Scalars['NonNegativeInt'];
+  NonPositiveFloat: Scalars['NonPositiveFloat'];
+  NonPositiveInt: Scalars['NonPositiveInt'];
+  PhoneNumber: Scalars['PhoneNumber'];
+  PositiveFloat: Scalars['PositiveFloat'];
+  PositiveInt: Scalars['PositiveInt'];
+  PostalCode: Scalars['PostalCode'];
+  UnsignedFloat: Scalars['UnsignedFloat'];
+  UnsignedInt: Scalars['UnsignedInt'];
+  URL: Scalars['URL'];
+  BigInt: Scalars['BigInt'];
+  Long: Scalars['Long'];
+  GUID: Scalars['GUID'];
+  Hexadecimal: Scalars['Hexadecimal'];
+  HexColorCode: Scalars['HexColorCode'];
+  HSL: Scalars['HSL'];
+  HSLA: Scalars['HSLA'];
+  IPv4: Scalars['IPv4'];
+  IPv6: Scalars['IPv6'];
+  ISBN: Scalars['ISBN'];
+  MAC: Scalars['MAC'];
+  Port: Scalars['Port'];
+  RGB: Scalars['RGB'];
+  RGBA: Scalars['RGBA'];
+  USCurrency: Scalars['USCurrency'];
+  JSON: Scalars['JSON'];
+  JSONObject: Scalars['JSONObject'];
+  IBAN: Scalars['IBAN'];
+  ObjectID: Scalars['ObjectID'];
   Query: {};
   User: User;
   Int: Scalars['Int'];
 };
+
+export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
+
+export interface EmailAddressScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['EmailAddress'], any> {
+  name: 'EmailAddress';
+}
+
+export interface NegativeFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NegativeFloat'], any> {
+  name: 'NegativeFloat';
+}
+
+export interface NegativeIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NegativeInt'], any> {
+  name: 'NegativeInt';
+}
+
+export interface NonNegativeFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NonNegativeFloat'], any> {
+  name: 'NonNegativeFloat';
+}
+
+export interface NonNegativeIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NonNegativeInt'], any> {
+  name: 'NonNegativeInt';
+}
+
+export interface NonPositiveFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NonPositiveFloat'], any> {
+  name: 'NonPositiveFloat';
+}
+
+export interface NonPositiveIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NonPositiveInt'], any> {
+  name: 'NonPositiveInt';
+}
+
+export interface PhoneNumberScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['PhoneNumber'], any> {
+  name: 'PhoneNumber';
+}
+
+export interface PositiveFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['PositiveFloat'], any> {
+  name: 'PositiveFloat';
+}
+
+export interface PositiveIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['PositiveInt'], any> {
+  name: 'PositiveInt';
+}
+
+export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['PostalCode'], any> {
+  name: 'PostalCode';
+}
+
+export interface UnsignedFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['UnsignedFloat'], any> {
+  name: 'UnsignedFloat';
+}
+
+export interface UnsignedIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['UnsignedInt'], any> {
+  name: 'UnsignedInt';
+}
+
+export interface UrlScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['URL'], any> {
+  name: 'URL';
+}
+
+export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
+  name: 'BigInt';
+}
+
+export interface LongScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Long'], any> {
+  name: 'Long';
+}
+
+export interface GuidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GUID'], any> {
+  name: 'GUID';
+}
+
+export interface HexadecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Hexadecimal'], any> {
+  name: 'Hexadecimal';
+}
+
+export interface HexColorCodeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['HexColorCode'], any> {
+  name: 'HexColorCode';
+}
+
+export interface HslScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['HSL'], any> {
+  name: 'HSL';
+}
+
+export interface HslaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['HSLA'], any> {
+  name: 'HSLA';
+}
+
+export interface IPv4ScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPv4'], any> {
+  name: 'IPv4';
+}
+
+export interface IPv6ScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPv6'], any> {
+  name: 'IPv6';
+}
+
+export interface IsbnScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['ISBN'], any> {
+  name: 'ISBN';
+}
+
+export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['MAC'], any> {
+  name: 'MAC';
+}
+
+export interface PortScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Port'], any> {
+  name: 'Port';
+}
+
+export interface RgbScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['RGB'], any> {
+  name: 'RGB';
+}
+
+export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['RGBA'], any> {
+  name: 'RGBA';
+}
+
+export interface UsCurrencyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['USCurrency'], any> {
+  name: 'USCurrency';
+}
+
+export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
+  name: 'JSON';
+}
+
+export interface JsonObjectScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSONObject'], any> {
+  name: 'JSONObject';
+}
+
+export interface IbanScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IBAN'], any> {
+  name: 'IBAN';
+}
+
+export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['ObjectID'], any> {
+  name: 'ObjectID';
+}
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
@@ -120,7 +392,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['EmailAddress'], ParentType, ContextType>;
   mobile?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   about?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -128,6 +400,40 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  DateTime?: GraphQLScalarType;
+  EmailAddress?: GraphQLScalarType;
+  NegativeFloat?: GraphQLScalarType;
+  NegativeInt?: GraphQLScalarType;
+  NonNegativeFloat?: GraphQLScalarType;
+  NonNegativeInt?: GraphQLScalarType;
+  NonPositiveFloat?: GraphQLScalarType;
+  NonPositiveInt?: GraphQLScalarType;
+  PhoneNumber?: GraphQLScalarType;
+  PositiveFloat?: GraphQLScalarType;
+  PositiveInt?: GraphQLScalarType;
+  PostalCode?: GraphQLScalarType;
+  UnsignedFloat?: GraphQLScalarType;
+  UnsignedInt?: GraphQLScalarType;
+  URL?: GraphQLScalarType;
+  BigInt?: GraphQLScalarType;
+  Long?: GraphQLScalarType;
+  GUID?: GraphQLScalarType;
+  Hexadecimal?: GraphQLScalarType;
+  HexColorCode?: GraphQLScalarType;
+  HSL?: GraphQLScalarType;
+  HSLA?: GraphQLScalarType;
+  IPv4?: GraphQLScalarType;
+  IPv6?: GraphQLScalarType;
+  ISBN?: GraphQLScalarType;
+  MAC?: GraphQLScalarType;
+  Port?: GraphQLScalarType;
+  RGB?: GraphQLScalarType;
+  RGBA?: GraphQLScalarType;
+  USCurrency?: GraphQLScalarType;
+  JSON?: GraphQLScalarType;
+  JSONObject?: GraphQLScalarType;
+  IBAN?: GraphQLScalarType;
+  ObjectID?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
