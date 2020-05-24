@@ -13,7 +13,7 @@ import { getUser } from "./models/users";
 export const resolvers: Resolvers ={
   Query: {
     user: (root, args, ctx,) => {
-      return getUser();
+      return ctx.models.user.getUser();
     } 
   }
 }
