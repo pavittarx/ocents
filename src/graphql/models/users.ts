@@ -1,4 +1,4 @@
-import { User } from "./tsdefs";
+import { User } from "./../tsdefs";
 
 export function getUser(): User {
   return {
