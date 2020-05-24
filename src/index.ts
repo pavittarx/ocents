@@ -1,19 +1,19 @@
 import { ApolloServer } from "apollo-server-express";
-import express from "express";
+import app from "./express";
 
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-import { gqlTypeDefs } from './graphql/schema';
-import { gqlResolvers } from './graphql/resolvers';
+import { gqlTypeDefs } from "./graphql/schema";
+import { gqlResolvers } from "./graphql/resolvers";
 
-import * as userModel from './graphql/models/users';
+import * as userModel from "./graphql/models/users";
 import { typeDefs } from "graphql-scalars";
 
 export interface Context {
   models: {
     users: typeof userModel;
-  }
+  };
 }
 
 const server = new ApolloServer({
@@ -24,13 +24,12 @@ const server = new ApolloServer({
       ...req,
       prisma,
       models: {
-        user: userModel
-      }
-    }
-  }
+        user: userModel,
+      },
+    };
+  },
 });
 
-const app = express();
 server.applyMiddleware({ app });
 
 app.listen({ port: 4000 }, () =>
