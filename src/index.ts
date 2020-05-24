@@ -1,10 +1,15 @@
-import express from "express";
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-express";
+import * as express from "express";
+
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
+import { typeDefs } from './graphql/schema';
+import { resolvers } from './graphql/resolvers';
+
 const server = new ApolloServer({
-  modules: [require("./graphql/User")],
+  typeDefs,
+  resolvers,
   context: (req) => {
     return {
       ...req,

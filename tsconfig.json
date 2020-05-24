@@ -1,10 +1,19 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "src",
     "outDir": "dist",
-    "strict": true,
-    "lib": ["esnext", "dom"],
-    "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es2017",
+      "esnext.asynciterable"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "examples"
+  ]
 }
