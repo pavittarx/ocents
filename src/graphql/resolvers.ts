@@ -4,8 +4,16 @@ import { resolvers } from "graphql-scalars";
 export const gqlResolvers: Resolvers ={
   ...resolvers,
   Query: {
-    user: (root, args, ctx,) => {
-      return ctx.models.user.getUser();
+    user:async (root, args, ctx, info) => {
+      console.log(ctx.prisma);
+      const userData = await ctx.prisma.users.findOne({
+        where :{
+          id: 1
+        }
+      });
+
+      console.log("Data", userData);
+      return userData;
     } 
   }
 }

@@ -12,5 +12,6 @@ export const gqlTypeDefs = gql`
     mobile: String
     picture: String
     about: String
+    createdAt: DateTime
   }
 `;
