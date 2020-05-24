@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo 'No tests available.'",
+    "build": "graphql-codegen --config codegen.yml && tsc",
+    "dev": "ts-node-dev src/index",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "repository": {
@@ -32,7 +34,7 @@
     "@prisma/cli": "^2.0.0-beta.5",
     "@types/graphql": "^14.5.0",
     "@types/node": "^14.0.5",
-    "ts-node": "^8.10.1",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.9.3"
   },
   "dependencies": {
