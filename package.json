@@ -7,7 +7,8 @@
     "test": "echo 'No tests available.'",
     "build": "graphql-codegen --config codegen.yml && tsc",
     "dev": "ts-node-dev --no-notify src/index",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "prisma": "prisma introspect && prisma generate"
   },
   "repository": {
     "type": "git",
@@ -41,12 +42,14 @@
   "dependencies": {
     "@prisma/client": "^2.0.0-beta.5",
     "apollo-server-express": "^2.13.1",
+    "bcrypt": "^4.0.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "graphql": "^15.0.0",
     "graphql-import": "^1.0.2",
     "graphql-scalars": "^1.1.2",
-    "graphql-tools": "^6.0.0"
+    "graphql-tools": "^6.0.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }

@@ -97,7 +97,7 @@ export type User = {
 export type AuthPayload = {
   __typename?: 'AuthPayload';
   token?: Maybe<Scalars['String']>;
-  User?: Maybe<User>;
+  user?: Maybe<User>;
 };
 
 export type Mutation = {
@@ -433,7 +433,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type AuthPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthPayload'] = ResolversParentTypes['AuthPayload']> = {
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  User?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 };
 

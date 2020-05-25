@@ -19,7 +19,7 @@ const gqlTypeDefs = gql`
 
   type AuthPayload {
     token: String
-    User: User
+    user: User
   }
 
   type Mutation {
