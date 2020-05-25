@@ -1,4 +1,4 @@
-import { Resolvers } from "./tsdefs";
+import { Resolvers, User, ResolversTypes } from "./tsdefs";
 import { resolvers } from "graphql-scalars";
 
 export const gqlResolvers: Resolvers = {
@@ -15,5 +15,18 @@ export const gqlResolvers: Resolvers = {
       console.log("Data", userData);
       return userData;
     },
+  },
+
+  Mutation: {
+    signup: async (root, args, ctx, info): Promise<User> => {
+      const user = await ctx.prisma.users.create({
+        data: {
+          name: args.name,
+          email: args.email
+        }
+      })
+
+      return user;
+    }
   },
 };

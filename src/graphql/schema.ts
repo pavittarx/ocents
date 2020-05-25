@@ -22,12 +22,11 @@ const gqlTypeDefs = gql`
     User: User
   }
 
-  type Mutations {
+  type Mutation {
     signup(name: String, email: EmailAddress, password: String): User
     login(email: EmailAddress, password: String): AuthPayload
   }
 `;
-
 
 const defs = mergeTypeDefs([...typeDefs, gqlTypeDefs]);
 export const typedefs = defs;
