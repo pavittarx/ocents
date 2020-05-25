@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -91,6 +92,31 @@ export type User = {
   picture?: Maybe<Scalars['String']>;
   about?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type AuthPayload = {
+  __typename?: 'AuthPayload';
+  token?: Maybe<Scalars['String']>;
+  User?: Maybe<User>;
+};
+
+export type Mutations = {
+  __typename?: 'Mutations';
+  signup?: Maybe<User>;
+  login?: Maybe<AuthPayload>;
+};
+
+
+export type MutationsSignupArgs = {
+  name?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['EmailAddress']>;
+  password?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationsLoginArgs = {
+  email?: Maybe<Scalars['EmailAddress']>;
+  password?: Maybe<Scalars['String']>;
 };
 
 
@@ -205,6 +231,8 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  AuthPayload: ResolverTypeWrapper<AuthPayload>;
+  Mutations: ResolverTypeWrapper<Mutations>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -248,6 +276,8 @@ export type ResolversParentTypes = {
   Query: {};
   User: User;
   Int: Scalars['Int'];
+  AuthPayload: AuthPayload;
+  Mutations: Mutations;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -401,6 +431,18 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 };
 
+export type AuthPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthPayload'] = ResolversParentTypes['AuthPayload']> = {
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  User?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type MutationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutations'] = ResolversParentTypes['Mutations']> = {
+  signup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationsSignupArgs, never>>;
+  login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationsLoginArgs, never>>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
 export type Resolvers<ContextType = any> = {
   DateTime?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
@@ -438,6 +480,8 @@ export type Resolvers<ContextType = any> = {
   ObjectID?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  AuthPayload?: AuthPayloadResolvers<ContextType>;
+  Mutations?: MutationsResolvers<ContextType>;
 };
 
 

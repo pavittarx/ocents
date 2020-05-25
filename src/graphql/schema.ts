@@ -1,11 +1,13 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
+import { typeDefs } from "graphql-scalars";
+import { mergeTypeDefs } from "graphql-tools";
 
-export const gqlTypeDefs = gql`
-  type Query{
+const gqlTypeDefs = gql`
+  type Query {
     user: User!
   }
 
-  type User{
+  type User {
     id: Int!
     name: String!
     email: EmailAddress!
@@ -14,4 +16,18 @@ export const gqlTypeDefs = gql`
     about: String
     createdAt: DateTime
   }
+
+  type AuthPayload {
+    token: String
+    User: User
+  }
+
+  type Mutations {
+    signup(name: String, email: EmailAddress, password: String): User
+    login(email: EmailAddress, password: String): AuthPayload
+  }
 `;
+
+
+const defs = mergeTypeDefs([...typeDefs, gqlTypeDefs]);
+export const typedefs = defs;

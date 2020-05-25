@@ -4,11 +4,10 @@ import app from "./express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-import { gqlTypeDefs } from "./graphql/schema";
+import { typedefs } from "./graphql/schema";
 import { gqlResolvers } from "./graphql/resolvers";
 
 import * as userModel from "./graphql/models/users";
-import { typeDefs } from "graphql-scalars";
 
 export interface Context {
   models: {
@@ -17,7 +16,7 @@ export interface Context {
 }
 
 const server = new ApolloServer({
-  typeDefs: [...typeDefs, gqlTypeDefs],
+  typeDefs: typedefs,
   resolvers: gqlResolvers,
   context: (req) => {
     return {
