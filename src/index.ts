@@ -1,19 +1,11 @@
 import { ApolloServer } from "apollo-server-express";
 import app from "./express";
-
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "./prisma";
 
 import { typedefs } from "./graphql/schema";
 import { gqlResolvers } from "./graphql/resolvers";
 
-import * as userModel from "./graphql/models/users";
-
-export interface Context {
-  models: {
-    users: typeof userModel;
-  };
-}
+import auth from "./services/auth";
 
 const server = new ApolloServer({
   typeDefs: typedefs,
@@ -21,10 +13,9 @@ const server = new ApolloServer({
   context: (req) => {
     return {
       ...req,
-      prisma,
-      models: {
-        user: userModel,
-      },
+      services: {
+        auth: auth
+      }
     };
   },
 });

@@ -3,6 +3,7 @@ import { resolvers } from "graphql-scalars";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+
 export const gqlResolvers: Resolvers = {
   ...resolvers,
 
@@ -40,30 +41,7 @@ export const gqlResolvers: Resolvers = {
     },
 
     login: async (root, args, ctx, info): Promise<AuthPayload> => {
-
-      let user = await ctx.prisma.users.findOne({
-        where: {
-          email: args.email
-        }
-      });
-      console.log("Logging");
-      console.log(user);
-      if(!user) throw new Error("Invalid Credentials")
-      else{
-        const auth = bcrypt.compare(args.password, user.password)
-        
-        if(auth) {
-          const tokenOptions = [{id:user.id, name: user.name}, "jwtPrivateKey"]
-          console.log(jwt.sign({id:user.id, name: user.name}, "jwtPrivateKey"));
-          return {
-            token: jwt.sign(...tokenOptions),
-            user
-          }
-
-        }
-        else throw new Error("Invalid Credentials");
-      }
-
+      return ctx.services.auth.login(args.email, args.password);
     },
   }
 };
