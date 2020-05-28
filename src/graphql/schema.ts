@@ -4,7 +4,7 @@ import { mergeTypeDefs } from "graphql-tools";
 
 const gqlTypeDefs = gql`
   type Query {
-    user: User!
+    user(id: Int): User!
   }
 
   type User {
@@ -15,6 +15,28 @@ const gqlTypeDefs = gql`
     picture: String
     about: String
     createdAt: DateTime
+    EventAttendee: EventAttendee
+    Events: [Event]
+  }
+
+  type Event {
+    id: Int!
+    title: String!
+    content: String!
+    location: String
+    published: Boolean!
+    host: Int!
+    createdAt: DateTime
+    Users: User!
+    EventAttendees: [EventAttendee]
+  }
+
+  type EventAttendee {
+    eventId: Int!
+    id: Int!
+    userId: Int!
+    Events: [Event!]!
+    User: User
   }
 
   type AuthPayload {

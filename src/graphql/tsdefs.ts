@@ -83,6 +83,11 @@ export type Query = {
   user: User;
 };
 
+
+export type QueryUserArgs = {
+  id?: Maybe<Scalars['Int']>;
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
@@ -92,6 +97,30 @@ export type User = {
   picture?: Maybe<Scalars['String']>;
   about?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  EventAttendee?: Maybe<EventAttendee>;
+  Events?: Maybe<Array<Maybe<Event>>>;
+};
+
+export type Event = {
+  __typename?: 'Event';
+  id: Scalars['Int'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+  location?: Maybe<Scalars['String']>;
+  published: Scalars['Boolean'];
+  host: Scalars['Int'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  Users: User;
+  EventAttendees?: Maybe<Array<Maybe<EventAttendee>>>;
+};
+
+export type EventAttendee = {
+  __typename?: 'EventAttendee';
+  eventId: Scalars['Int'];
+  id: Scalars['Int'];
+  userId: Scalars['Int'];
+  Events: Array<Event>;
+  User?: Maybe<User>;
 };
 
 export type AuthPayload = {
@@ -229,8 +258,10 @@ export type ResolversTypes = {
   IBAN: ResolverTypeWrapper<Scalars['IBAN']>;
   ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
   Query: ResolverTypeWrapper<{}>;
-  User: ResolverTypeWrapper<User>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  User: ResolverTypeWrapper<User>;
+  Event: ResolverTypeWrapper<Event>;
+  EventAttendee: ResolverTypeWrapper<EventAttendee>;
   AuthPayload: ResolverTypeWrapper<AuthPayload>;
   Mutation: ResolverTypeWrapper<{}>;
 };
@@ -274,8 +305,10 @@ export type ResolversParentTypes = {
   IBAN: Scalars['IBAN'];
   ObjectID: Scalars['ObjectID'];
   Query: {};
-  User: User;
   Int: Scalars['Int'];
+  User: User;
+  Event: Event;
+  EventAttendee: EventAttendee;
   AuthPayload: AuthPayload;
   Mutation: {};
 };
@@ -417,7 +450,7 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 }
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -428,6 +461,30 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   about?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  EventAttendee?: Resolver<Maybe<ResolversTypes['EventAttendee']>, ParentType, ContextType>;
+  Events?: Resolver<Maybe<Array<Maybe<ResolversTypes['Event']>>>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type EventResolvers<ContextType = any, ParentType extends ResolversParentTypes['Event'] = ResolversParentTypes['Event']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  location?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  published?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  host?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  Users?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  EventAttendees?: Resolver<Maybe<Array<Maybe<ResolversTypes['EventAttendee']>>>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type EventAttendeeResolvers<ContextType = any, ParentType extends ResolversParentTypes['EventAttendee'] = ResolversParentTypes['EventAttendee']> = {
+  eventId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  userId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  Events?: Resolver<Array<ResolversTypes['Event']>, ParentType, ContextType>;
+  User?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 };
 
@@ -479,6 +536,8 @@ export type Resolvers<ContextType = any> = {
   ObjectID?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  Event?: EventResolvers<ContextType>;
+  EventAttendee?: EventAttendeeResolvers<ContextType>;
   AuthPayload?: AuthPayloadResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
 };

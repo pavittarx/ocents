@@ -10,9 +10,10 @@ export const gqlResolvers: Resolvers = {
   Query: {
     user: async (root, args, ctx, info) => {
       console.log(ctx.prisma);
+      console.log(args);
       const userData = await ctx.prisma.users.findOne({
         where: {
-          id: 1,
+          id: args.id,
         },
       });
 
