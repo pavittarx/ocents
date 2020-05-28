@@ -24,25 +24,11 @@ export const gqlResolvers: Resolvers = {
 
   Mutation: {
     signup: async (root, args, ctx, info): Promise<User> => {
-      return new Promise((resolve, reject)=>{
-        bcrypt.hash(args.password, 8, async (err, hash)=>{
-          if(err) reject(err);
-          
-          const user = await ctx.prisma.users.create({
-            data: {
-              name: args.name,
-              email: args.email,
-              password: hash
-            },
-          });
-
-          resolve(user);
-        });
-      })
+      return await ctx.services.auth.signup(args.name, args.email, args.password);
     },
 
     login: async (root, args, ctx, info): Promise<AuthPayload> => {
-      return ctx.services.auth.login(args.email, args.password);
+      return await ctx.services.auth.login(args.email, args.password);
     },
   }
 };

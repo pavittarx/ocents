@@ -1,4 +1,4 @@
-import { AuthPayload } from "../graphql/tsdefs";
+import { AuthPayload, User } from "../graphql/tsdefs";
 import prisma from "../prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -12,7 +12,7 @@ export async function login(
   const user = await prisma.users.findOne({
     where: {
       email: email,
-    },
+    }
   });
 
   if (!user) throw new AuthenticationError("Authentication Failed");
@@ -26,18 +26,43 @@ export async function login(
 
   return {
     token: jwt.sign(...tokenOptions),
-    user: {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-    },
+    user: user,
   };
 }
 
-export async function signup({name: string, email: email, password: password}){
+export async function signup(
+  name: string, 
+    email: string, 
+    password: string
+    ): Promise<User> {
+      return new Promise(async (resolve, reject)=>{
+        
+        const existingUser = await prisma.users.findOne({
+          where: {
+            email: email,
+          }
+        });
 
+        if (existingUser) {
+          reject("User allready exist");
+        }
+        bcrypt.hash(password, 8, async (err, hash)=>{
+          if(err) reject(err);
+          
+          const user = await prisma.users.create({
+            data: {
+              name: name,
+              email: email,
+              password: hash
+            },
+          });
+
+          resolve(user);
+        });
+      })
 }
 
 export default {
   login: login,
+  signup: signup
 };

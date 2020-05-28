@@ -94,6 +94,7 @@ export type User = {
   name: Scalars['String'];
   email: Scalars['EmailAddress'];
   mobile?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
   about?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -458,6 +459,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['EmailAddress'], ParentType, ContextType>;
   mobile?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   about?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;

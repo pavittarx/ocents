@@ -12,6 +12,7 @@ const gqlTypeDefs = gql`
     name: String!
     email: EmailAddress!
     mobile: String
+    password: String
     picture: String
     about: String
     createdAt: DateTime

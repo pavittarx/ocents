@@ -20,7 +20,7 @@ CREATE TABLE "public"."Events"(
   FOREIGN KEY ("host") REFERENCES "public"."Users"(id)
 );
 
-CREATE TABLE public."EventAttendees"(
+CREATE TABLE "public"."EventAttendees"(
   id SERIAL PRIMARY KEY NOT NULL,
   "userId" INTEGER NOT NULL,
   FOREIGN KEY ("userId") REFERENCES "public"."Users"(id),
