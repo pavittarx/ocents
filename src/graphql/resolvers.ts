@@ -23,12 +23,12 @@ export const gqlResolvers: Resolvers = {
   },
 
   Mutation: {
-    signup: async (root, args, ctx, info): Promise<User> => {
-      return await ctx.services.auth.signup(args.name, args.email, args.password);
+    signup: async (root, args, ctx): Promise<User> => {
+      return await ctx.services.auth.signup(args);
     },
 
     login: async (root, args, ctx, info): Promise<AuthPayload> => {
-      return await ctx.services.auth.login(args.email, args.password);
+      return await ctx.services.auth.login(args);
     },
   }
 };
