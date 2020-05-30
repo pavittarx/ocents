@@ -1,7 +1,8 @@
-import { Resolvers, User, AuthPayload } from "./tsdefs";
+import { Resolvers, User, AuthPayload, Event } from "./tsdefs";
 import { resolvers } from "graphql-scalars";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { AuthenticationError } from "apollo-server-express";
 
 export const gqlResolvers: Resolvers = {
   ...resolvers,
@@ -24,6 +25,16 @@ export const gqlResolvers: Resolvers = {
 
     login: async (root, args, ctx): Promise<AuthPayload> => {
       return await ctx.services.auth.login(args);
-    }
-  },
+    },
+
+    addEvent: async (root, args, ctx, info): Promise<Event> => {
+      const Authorization = ctx.req.get("Authorization");
+      console.log(Authorization);
+      const token = Authorization? Authorization.replace("Bearer ", "") :  new AuthenticationError("Auth Token Missing");
+      if(ctx.services.auth.auth({token}) == true)
+        return args;
+
+      return new AuthenticationError("Not authorized");
+    },
+  }
 };

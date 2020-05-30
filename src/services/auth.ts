@@ -1,4 +1,4 @@
-import { AuthPayload, User } from "../graphql/tsdefs";
+import { AuthPayload, User, Event } from "../graphql/tsdefs";
 import prisma from "../prisma";
 
 import bcrypt from "bcrypt";
@@ -49,6 +49,9 @@ export async function signup(args: Signup): Promise<User> {
 
 export async function auth(args: AuthToken): Promise<Boolean> {
   const payload = await jwt.decode(args.token);
+  console.log("payload:",payload);
+  if(!payload) return false;
+
   const user = await prisma.users.findOne({
     where: {
       id: payload.id,
@@ -57,10 +60,29 @@ export async function auth(args: AuthToken): Promise<Boolean> {
 
   const verifiedPlayLoad = await jwt.verify(args.token, user.password);
   if (verifiedPlayLoad) return true;
+
+}
+
+export async function addEvent(args): Promise<Event> {
+
+  const event = await prisma.events.create({
+    data: {
+      title: args.title,
+      content: args.content,
+      location: args.location,
+      published: args.published,
+     // host: args.id
+    }
+  });
+
+  if(!event) throw(Error); 
+
+  return args;
 }
 
 export default {
   login: login,
   signup: signup,
-  auth: auth
+  auth: auth,
+  addEvent: addEvent,
 };

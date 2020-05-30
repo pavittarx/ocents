@@ -48,6 +48,7 @@ const gqlTypeDefs = gql`
   type Mutation {
     signup(name: String, email: EmailAddress, password: String): User
     login(email: EmailAddress, password: String): AuthPayload
+    addEvent(title: String, content: String, location: String, published: Boolean): Event
   }
 `;
 
