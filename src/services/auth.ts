@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { AuthenticationError } from "apollo-server-express";
-import { Login, Signup } from "./types";
+import { Login, Signup, AuthToken } from "./types";
 
 export async function login(args: Login): Promise<AuthPayload> {
   const user = await prisma.users.findOne({
@@ -47,7 +47,20 @@ export async function signup(args: Signup): Promise<User> {
   return newUser;
 }
 
+export async function auth(args: AuthToken): Promise<Boolean> {
+  const payload = await jwt.decode(args.token);
+  const user = await prisma.users.findOne({
+    where: {
+      id: payload.id,
+    },
+  });
+
+  const verifiedPlayLoad = await jwt.verify(args.token, user.password);
+  if (verifiedPlayLoad) return true;
+}
+
 export default {
   login: login,
   signup: signup,
+  auth: auth
 };

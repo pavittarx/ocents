@@ -81,11 +81,17 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   user: User;
+  auth: Scalars['Boolean'];
 };
 
 
 export type QueryUserArgs = {
   id?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryAuthArgs = {
+  token?: Maybe<Scalars['String']>;
 };
 
 export type User = {
@@ -452,6 +458,7 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
+  auth?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<QueryAuthArgs, never>>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {

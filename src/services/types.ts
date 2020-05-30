@@ -6,3 +6,7 @@ export interface Login{
 export interface Signup extends Login{
   name: string;
 }
+
+export interface AuthToken{
+  token: string
+}
