@@ -1,4 +1,4 @@
-import { Resolvers, User, AuthPayload, Event } from "./tsdefs";
+import { Resolvers, User, AuthPayload, Event, EventAttendees } from "./tsdefs";
 import { resolvers } from "graphql-scalars";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -33,7 +33,17 @@ export const gqlResolvers: Resolvers = {
       
       const payload = await ctx.services.auth.auth({token});
 
-      return ctx.services.events.add(Object.assign({hostId: payload.id}, args));
+      return await ctx.services.events.add(Object.assign({hostId: payload.id}, args));
     },
+
+    addEventAttendees: async (root, args, ctx, info): Promise<EventAttendees> =>
+    {
+      const Authorization = ctx.req.get("Authorization");
+      const token = Authorization? Authorization.replace("Bearer ", "") :  new AuthenticationError("Auth Token Missing");
+      
+      const payload = await ctx.services.auth.auth({token});
+
+      return await ctx.services.attendees.add(Object.assign({userId: payload.id}, args));
+    }
   }
 };
