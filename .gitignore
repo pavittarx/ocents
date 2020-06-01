@@ -1,6 +1,7 @@
 node_modules
 # files to be ignored
 .ignore
+package-lock.json
 prisma/.env
 prisma/postgres.sql
 dist
