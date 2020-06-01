@@ -8,33 +8,34 @@ datasource db {
 }
 
 model EventAttendees {
-  id      Int    @default(autoincrement()) @id
   eventId Int
+  id      Int    @default(autoincrement()) @id
   userId  Int
   Events  Events @relation(fields: [eventId], references: [id])
   Users   Users  @relation(fields: [userId], references: [id])
 }
 
 model Events {
-  id             Int              @default(autoincrement()) @id
   content        String
   createdAt      DateTime         @default(now())
+  host           Int
+  id             Int              @default(autoincrement()) @id
   location       String
   published      Boolean
   title          String
-  host           Int
   Users          Users            @relation(fields: [host], references: [id])
   EventAttendees EventAttendees[]
 }
 
 model Users {
-  id             Int              @default(autoincrement()) @id
-  name           String
-  email          String           @unique
-  mobile         String?
-  picture        String?
   about          String?
   createdAt      DateTime         @default(now())
-  Events         Events[]
+  email          String           @unique
+  id             Int              @default(autoincrement()) @id
+  mobile         String?
+  name           String
+  password       String
+  picture        String?
   EventAttendees EventAttendees[]
+  Events         Events[]
 }

@@ -1,3 +1,7 @@
 node_modules
+# files to be ignored
 .ignore
 prisma/.env
+prisma/postgres.sql
+dist
+graphql.schema.json

@@ -1,0 +1,24 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name":"Ocents Debug Config",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node-dev",
+      "args": ["src/index"],
+      "restart": true,
+      "sourceMaps": true,
+      "console": "integratedTerminal",
+      "smartStep": true,
+      "protocol": "inspector",
+      "outFiles": [
+          "${workspaceFolder}/lib/**/*.js"
+        ]
+    }
+  ]
+}

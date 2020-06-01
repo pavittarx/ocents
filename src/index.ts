@@ -1,35 +1,27 @@
 import { ApolloServer } from "apollo-server-express";
-import * as express from "express";
+import app from "./express";
+import prisma from "./prisma";
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { typedefs } from "./graphql/schema";
+import { gqlResolvers } from "./graphql/resolvers";
 
-import { typeDefs } from './graphql/schema';
-import { resolvers } from './graphql/resolvers';
-
-import * as userModel from './graphql/models/users';
-
-export interface Context {
-  models: {
-    users: typeof userModel;
-  }
-}
+import auth from "./services/auth";
+import events from "./services/events";
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  typeDefs: typedefs,
+  resolvers: gqlResolvers,
   context: (req) => {
     return {
       ...req,
-      prisma,
-      models: {
-        user: userModel
+      services: {
+        auth: auth,
+        events: events
       }
-    }
-  }
+    };
+  },
 });
 
-const app = express();
 server.applyMiddleware({ app });
 
 app.listen({ port: 4000 }, () =>
