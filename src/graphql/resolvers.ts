@@ -29,12 +29,11 @@ export const gqlResolvers: Resolvers = {
 
     addEvent: async (root, args, ctx, info): Promise<Event> => {
       const Authorization = ctx.req.get("Authorization");
-      console.log(Authorization);
       const token = Authorization? Authorization.replace("Bearer ", "") :  new AuthenticationError("Auth Token Missing");
-      if(ctx.services.auth.auth({token}) == true)
-        return args;
+      
+      const payload = await ctx.services.auth.auth({token});
 
-      return new AuthenticationError("Not authorized");
+      return ctx.services.events.add(Object.assign({hostId: payload.id}, args));
     },
   }
 };

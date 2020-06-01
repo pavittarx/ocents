@@ -16,7 +16,6 @@ const gqlTypeDefs = gql`
     picture: String
     about: String
     createdAt: DateTime
-    EventAttendee: EventAttendee
     Events: [Event]
   }
 
@@ -28,16 +27,6 @@ const gqlTypeDefs = gql`
     published: Boolean!
     host: Int!
     createdAt: DateTime
-    Users: User!
-    EventAttendees: [EventAttendee]
-  }
-
-  type EventAttendee {
-    eventId: Int!
-    id: Int!
-    userId: Int!
-    Events: [Event!]!
-    User: User
   }
 
   type AuthPayload {

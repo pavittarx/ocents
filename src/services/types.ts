@@ -10,3 +10,11 @@ export interface Signup extends Login{
 export interface AuthToken{
   token: string
 }
+
+export interface EventArgs{
+  title:  string,
+  content: string,
+  location: string,
+  published: boolean,
+  hostId: number
+}
