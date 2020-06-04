@@ -1,14 +1,14 @@
 import { Resolvers, User, AuthPayload, Event, EventAttendees } from "./tsdefs";
 import { resolvers } from "graphql-scalars";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { AuthenticationError } from "apollo-server-express";
+
+import {getToken } from "./../libs/utils";
 
 export const gqlResolvers: Resolvers = {
   ...resolvers,
 
   Query: {
-    user: async (root, args, ctx, info) => {
+    user: async (root, args, ctx) => {
       const userData = await ctx.prisma.users.findOne({
         where: {
           id: args.id,
@@ -27,22 +27,17 @@ export const gqlResolvers: Resolvers = {
       return await ctx.services.auth.login(args);
     },
 
-    addEvent: async (root, args, ctx, info): Promise<Event> => {
-      const Authorization = ctx.req.get("Authorization");
-      const token = Authorization? Authorization.replace("Bearer ", "") :  new AuthenticationError("Auth Token Missing");
-      
+    addEvent: async (root, args, ctx): Promise<Event> => {
+      const token = getToken(ctx.req.get("Authorization"));
       const payload = await ctx.services.auth.auth({token});
 
       return await ctx.services.events.add(Object.assign({hostId: payload.id}, args));
     },
 
-    addEventAttendees: async (root, args, ctx, info): Promise<EventAttendees> =>
+    addAttendees: async (root, args, ctx): Promise<EventAttendees> =>
     {
-      const Authorization = ctx.req.get("Authorization");
-      const token = Authorization? Authorization.replace("Bearer ", "") :  new AuthenticationError("Auth Token Missing");
-      
+      const token = getToken(ctx.req.get("Authorization"));
       const payload = await ctx.services.auth.auth({token});
-
       return await ctx.services.attendees.add(Object.assign({userId: payload.id}, args));
     }
   }

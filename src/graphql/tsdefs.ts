@@ -129,7 +129,7 @@ export type Mutation = {
   signup?: Maybe<User>;
   login?: Maybe<AuthPayload>;
   addEvent?: Maybe<Event>;
-  addEventAttendees?: Maybe<EventAttendees>;
+  addAttendees?: Maybe<EventAttendees>;
 };
 
 
@@ -154,7 +154,7 @@ export type MutationAddEventArgs = {
 };
 
 
-export type MutationAddEventAttendeesArgs = {
+export type MutationAddAttendeesArgs = {
   eventId?: Maybe<Scalars['Int']>;
 };
 
@@ -503,7 +503,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   signup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationSignupArgs, never>>;
   login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, never>>;
   addEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationAddEventArgs, never>>;
-  addEventAttendees?: Resolver<Maybe<ResolversTypes['EventAttendees']>, ParentType, ContextType, RequireFields<MutationAddEventAttendeesArgs, never>>;
+  addAttendees?: Resolver<Maybe<ResolversTypes['EventAttendees']>, ParentType, ContextType, RequireFields<MutationAddAttendeesArgs, never>>;
 };
 
 export type Resolvers<ContextType = any> = {
