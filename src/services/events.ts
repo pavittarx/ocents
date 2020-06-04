@@ -2,7 +2,6 @@ import { Event } from "./../graphql/tsdefs";
 import prisma from "./../prisma";
 
 import { EventArgs } from "./types";
-import { UsersClient } from "@prisma/client";
 
 export async function add(args: EventArgs): Promise<Event> {
   const event = await prisma.events.create({
