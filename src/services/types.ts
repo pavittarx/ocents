@@ -18,3 +18,8 @@ export interface EventArgs{
   published: boolean,
   hostId: number
 }
+
+export interface EventAttendeesArgs{
+  userId: number,
+  eventId: number
+}

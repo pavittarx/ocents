@@ -7,6 +7,7 @@ import { gqlResolvers } from "./graphql/resolvers";
 
 import auth from "./services/auth";
 import events from "./services/events";
+import attendees from "./services/attendees"
 
 const server = new ApolloServer({
   typeDefs: typedefs,
@@ -16,7 +17,8 @@ const server = new ApolloServer({
       ...req,
       services: {
         auth: auth,
-        events: events
+        events: events,
+        attendees: attendees
       }
     };
   },
