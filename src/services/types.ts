@@ -17,6 +17,7 @@ export interface AuthToken{
 }
 
 export interface EventArgs{
+  id: number,
   title:  string,
   content: string,
   location: string,

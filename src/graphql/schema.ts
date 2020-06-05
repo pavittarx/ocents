@@ -43,7 +43,8 @@ const gqlTypeDefs = gql`
     signup(name: String, email: EmailAddress, password: String): User
     login(email: EmailAddress, password: String): AuthPayload
     addEvent(title: String, content: String, location: String, published: Boolean): Event
-    addAttendees(eventId: Int): EventAttendees
+    updateEvent(id: Int, title: String, content: String, location: String, published: Boolean): Event
+    addEventAttendees(eventId: Int): EventAttendees
 
   }
 `;

@@ -9,6 +9,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  UtcOffset: any;
   EmailAddress: any;
   NegativeFloat: any;
   NegativeInt: any;
@@ -42,7 +43,10 @@ export type Scalars = {
   JSONObject: any;
   IBAN: any;
   ObjectID: any;
+  Void: any;
 };
+
+
 
 
 
@@ -129,7 +133,8 @@ export type Mutation = {
   signup?: Maybe<User>;
   login?: Maybe<AuthPayload>;
   addEvent?: Maybe<Event>;
-  addAttendees?: Maybe<EventAttendees>;
+  updateEvent?: Maybe<Event>;
+  addEventAttendees?: Maybe<EventAttendees>;
 };
 
 
@@ -154,7 +159,16 @@ export type MutationAddEventArgs = {
 };
 
 
-export type MutationAddAttendeesArgs = {
+export type MutationUpdateEventArgs = {
+  id?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationAddEventAttendeesArgs = {
   eventId?: Maybe<Scalars['Int']>;
 };
 
@@ -234,6 +248,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  UtcOffset: ResolverTypeWrapper<Scalars['UtcOffset']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   NegativeFloat: ResolverTypeWrapper<Scalars['NegativeFloat']>;
   NegativeInt: ResolverTypeWrapper<Scalars['NegativeInt']>;
@@ -267,6 +282,7 @@ export type ResolversTypes = {
   JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
   IBAN: ResolverTypeWrapper<Scalars['IBAN']>;
   ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
+  Void: ResolverTypeWrapper<Scalars['Void']>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   User: ResolverTypeWrapper<User>;
@@ -281,6 +297,7 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Boolean: Scalars['Boolean'];
   DateTime: Scalars['DateTime'];
+  UtcOffset: Scalars['UtcOffset'];
   EmailAddress: Scalars['EmailAddress'];
   NegativeFloat: Scalars['NegativeFloat'];
   NegativeInt: Scalars['NegativeInt'];
@@ -314,6 +331,7 @@ export type ResolversParentTypes = {
   JSONObject: Scalars['JSONObject'];
   IBAN: Scalars['IBAN'];
   ObjectID: Scalars['ObjectID'];
+  Void: Scalars['Void'];
   Query: {};
   Int: Scalars['Int'];
   User: User;
@@ -325,6 +343,10 @@ export type ResolversParentTypes = {
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
+}
+
+export interface UtcOffsetScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['UtcOffset'], any> {
+  name: 'UtcOffset';
 }
 
 export interface EmailAddressScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['EmailAddress'], any> {
@@ -459,6 +481,10 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
   name: 'ObjectID';
 }
 
+export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Void'], any> {
+  name: 'Void';
+}
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
 };
@@ -503,11 +529,13 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   signup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationSignupArgs, never>>;
   login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, never>>;
   addEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationAddEventArgs, never>>;
-  addAttendees?: Resolver<Maybe<ResolversTypes['EventAttendees']>, ParentType, ContextType, RequireFields<MutationAddAttendeesArgs, never>>;
+  updateEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationUpdateEventArgs, never>>;
+  addEventAttendees?: Resolver<Maybe<ResolversTypes['EventAttendees']>, ParentType, ContextType, RequireFields<MutationAddEventAttendeesArgs, never>>;
 };
 
 export type Resolvers<ContextType = any> = {
   DateTime?: GraphQLScalarType;
+  UtcOffset?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
   NegativeFloat?: GraphQLScalarType;
   NegativeInt?: GraphQLScalarType;
@@ -541,6 +569,7 @@ export type Resolvers<ContextType = any> = {
   JSONObject?: GraphQLScalarType;
   IBAN?: GraphQLScalarType;
   ObjectID?: GraphQLScalarType;
+  Void?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Event?: EventResolvers<ContextType>;

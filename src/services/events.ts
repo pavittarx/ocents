@@ -32,6 +32,22 @@ export async function remove(args: ID){
   return deletedEvent;
 }
 
+export async function update(args: EventArgs){
+  const updateEvent = await prisma.events.update({
+    where: {
+      id: args.id,
+    },
+    data:{
+      title: args.title,
+      content: args.content,
+      location: args.location,
+      published: args.published? args.published : false
+    }
+  })
+  return updateEvent;
+}
+
+
 export default {
   add: add,
   remove: remove
