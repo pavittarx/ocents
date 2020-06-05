@@ -50,5 +50,6 @@ export async function update(args: EventArgs){
 
 export default {
   add: add,
-  remove: remove
+  remove: remove,
+  update: update
 };
