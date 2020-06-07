@@ -27,7 +27,7 @@ export interface UpdateEventArgs extends EventArgs {
   id: number;
 }
 
-export interface EventAttendeesArgs {
+export interface EventAttendeeArgs {
   userId: number;
   eventId: number;
 }

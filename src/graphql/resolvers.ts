@@ -1,6 +1,5 @@
-import { Resolvers, User, AuthPayload, Event, EventAttendees } from "./tsdefs";
+import { Resolvers, User, AuthPayload, Event, EventAttendee } from "./tsdefs";
 import { resolvers } from "graphql-scalars";
-import { AuthenticationError } from "apollo-server-express";
 
 import {getToken } from "./../libs/utils";
 
@@ -42,14 +41,14 @@ export const gqlResolvers: Resolvers = {
     },
 
     removeEvent: async (root , args, ctx): Promise<Event> => {
-      return ctx.services.events.remove(args.id);
+      return ctx.services.events.remove({id: args.id});
     },
      
-    addAttendees: async (root, args, ctx): Promise<EventAttendees> =>
+    addAttendee: async (root, args, ctx): Promise<EventAttendee> =>
     {
       const token = getToken(ctx.req.get("Authorization"));
       const payload = await ctx.services.auth.auth({token});
-      return await ctx.services.attendees.add(Object.assign({userId: payload.id}, args));
+      return await ctx.services.events.addAttendee(Object.assign({userId: payload.id}, args));
     }   
   }
 };

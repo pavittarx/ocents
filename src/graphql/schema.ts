@@ -29,7 +29,7 @@ const gqlTypeDefs = gql`
     createdAt: DateTime
   }
 
-  type EventAttendees{
+  type EventAttendee{
     userId: Int!
     eventId: Int!
   }
@@ -45,7 +45,7 @@ const gqlTypeDefs = gql`
     addEvent(title: String, content: String, location: String, published: Boolean): Event
     updateEvent(id: Int, title: String, content: String, location: String, published: Boolean): Event
     removeEvent(id: Int): Event
-    addAttendees(eventId: Int): EventAttendees
+    addAttendee(eventId: Int): EventAttendee
 
   }
 `;
