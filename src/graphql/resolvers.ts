@@ -41,13 +41,15 @@ export const gqlResolvers: Resolvers = {
       return await ctx.services.events.update(Object.assign({hostId: payload.id}, args));
     },
 
-    addEventAttendees: async (root, args, ctx): Promise<EventAttendees> =>
+    removeEvent: async (root , args, ctx): Promise<Event> => {
+      return ctx.services.events.remove(args.id);
+    },
+     
+    addAttendees: async (root, args, ctx): Promise<EventAttendees> =>
     {
       const token = getToken(ctx.req.get("Authorization"));
       const payload = await ctx.services.auth.auth({token});
       return await ctx.services.attendees.add(Object.assign({userId: payload.id}, args));
-    },
-
-    
+    }   
   }
 };

@@ -1,7 +1,7 @@
-import { Event } from "./../graphql/tsdefs";
-import prisma from "./../prisma";
+import { Event } from "../graphql/tsdefs";
+import prisma from "../prisma";
 
-import { EventArgs, ID } from "./types";
+import { EventArgs, UpdateEventArgs, ID } from "./types";
 
 export async function add(args: EventArgs): Promise<Event> {
   const event = await prisma.events.create({
@@ -24,15 +24,14 @@ export async function add(args: EventArgs): Promise<Event> {
 export async function remove(args: ID){
   const deletedEvent = await prisma.events.delete({
     where: {
-      id: args.id
+      id: args
     }
   })
-
-  console.log(deletedEvent);
+  
   return deletedEvent;
 }
 
-export async function update(args: EventArgs){
+export async function update(args: UpdateEventArgs){
   const updateEvent = await prisma.events.update({
     where: {
       id: args.id,

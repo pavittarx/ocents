@@ -44,7 +44,8 @@ const gqlTypeDefs = gql`
     login(email: EmailAddress, password: String): AuthPayload
     addEvent(title: String, content: String, location: String, published: Boolean): Event
     updateEvent(id: Int, title: String, content: String, location: String, published: Boolean): Event
-    addEventAttendees(eventId: Int): EventAttendees
+    removeEvent(id: Int): Event
+    addAttendees(eventId: Int): EventAttendees
 
   }
 `;
