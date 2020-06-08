@@ -8,12 +8,7 @@ export const gqlResolvers: Resolvers = {
 
   Query: {
     user: async (root, args, ctx) => {
-      const userData = await ctx.prisma.users.findOne({
-        where: {
-          id: args.id,
-        },
-      });
-      return userData;
+      return await ctx.services.users.getUserById(args);
     }
   },
 
