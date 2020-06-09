@@ -1,9 +1,18 @@
 # Ocents
-Ocents, short for Occassions & Events, is a platform for register, schedule and manage events. 
+Ocents is a platform for facilitating communication. It will help you to inform others, plan things and discuss together. 
 
-## Use Cases 
-* Create an Zoom Meeting event and invite everyone with a sharable link. 
-* Got to host a paid event? Create an event and sell tickets, just by sharing a link. 
-* Fundraising for a cause? Just create an event and share the link for any or all of the donations. 
+* Invite everyone with a shareable Link. 
+* Notify your audience with updates you make. 
+* Discuss stuff that matters, keeping everyone in the sync. 
+* Sell tickets for your conferences, webinars, online courses. 
+* Raise funds for a cause, projects or anything you can think of. 
 
-[Note] This is a still a work in progress.
+## Some typical use cases
+
+1. The tutors can create an event page, and just post updates for any successive online classes they host. They can clear up doubts, and answers are visible to others as well. 
+
+2. A group of friends can create a page to jam up ideas for a project they want to work on. 
+
+## Tech Stack 
+
+![TechStack](docs/stack.png)

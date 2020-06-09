@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/pavittarx/ocents#readme",
   "devDependencies": {
-    "@graphql-codegen/cli": "1.15.0",
+    "@graphql-codegen/cli": "^1.15.0",
     "@graphql-codegen/introspection": "^1.14.0",
     "@graphql-codegen/typescript": "1.15.0",
     "@graphql-codegen/typescript-resolvers": "1.14.0",
@@ -49,6 +49,7 @@
     "express": "^4.17.1",
     "graphql": "^15.0.0",
     "graphql-scalars": "^1.1.2",
+    "graphql-tag": "^2.10.3",
     "graphql-tools": "^6.0.0",
     "jsonwebtoken": "^8.5.1"
   }

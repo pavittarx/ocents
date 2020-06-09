@@ -1,27 +1,25 @@
 import { ApolloServer } from "apollo-server-express";
 
-import { typedefs } from "./graphql/schema";
-import { gqlResolvers } from "./graphql/resolvers";
+import { schema} from "./graphql/schema";
 
 import auth from "./services/auth";
 import events from "./services/events";
-import attendees from "./services/attendees"
+import users from "./services/users";
 
 export const server = new ApolloServer({
-  typeDefs: typedefs,
-  resolvers: gqlResolvers,
+  schema,
   context: (req) => {
     return {
       ...req,
       services: {
         auth: auth,
-        events: events,
-        attendees: attendees
+        users: users,
+        events: events
       }
     };
   },
   introspection: true,
-  playground: true
+  playground: true,
 });
 
 export default server;

@@ -56,7 +56,6 @@ export async function auth(args: AuthToken): Promise<Boolean> {
       id: payload.id,
     },
   });
-
   const verifiedPlayLoad = await jwt.verify(args.token, user.password);
   return verifiedPlayLoad? verifiedPlayLoad: new AuthenticationError("Invalid Token");
 }

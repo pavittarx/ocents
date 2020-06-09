@@ -1,51 +1,24 @@
-import { gql } from "apollo-server-express";
-import { typeDefs } from "graphql-scalars";
-import { mergeTypeDefs } from "graphql-tools";
+import { makeExecutableSchema } from "apollo-server-express";
+import { typeDefs as scalarTypeDefs } from "graphql-scalars";
 
-const gqlTypeDefs = gql`
-  type Query {
-    user(id: Int): User!
-  }
+import { typeDefs as queryDefs } from "./base/query";
+import { typeDefs as mutationDefs } from "./base/mutation";
+import { typeDefs as userDefs } from "./models/user";
+import { typeDefs as eventDefs } from "./models/event";
+import { typeDefs as authDefs } from "./models/auth";
 
-  type User {
-    id: Int!
-    name: String!
-    email: EmailAddress!
-    mobile: String
-    password: String
-    picture: String
-    about: String
-    createdAt: DateTime
-    Events: [Event]
-  }
+import { resolvers } from "./resolvers";
 
-  type Event {
-    id: Int!
-    title: String!
-    content: String!
-    location: String
-    published: Boolean!
-    host: Int!
-    createdAt: DateTime
-  }
+export const schema = makeExecutableSchema({
+  typeDefs: [
+    ...scalarTypeDefs,
+    queryDefs,
+    mutationDefs,
+    userDefs,
+    eventDefs,
+    authDefs,
+  ],
+  resolvers,
+});
 
-  type EventAttendees{
-    userId: Int!
-    eventId: Int!
-  }
-
-  type AuthPayload {
-    token: String
-    user: User
-  }
-
-  type Mutation {
-    signup(name: String, email: EmailAddress, password: String): User
-    login(email: EmailAddress, password: String): AuthPayload
-    addEvent(title: String, content: String, location: String, published: Boolean): Event
-    addEventAttendees(eventId: Int): EventAttendees
-  }
-`;
-
-const defs = mergeTypeDefs([...typeDefs, gqlTypeDefs]);
-export const typedefs = defs;
+export default schema;
