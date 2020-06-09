@@ -8,41 +8,77 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** Use JavaScript Date object for date/time fields. */
   DateTime: any;
+  /** A field whose value is a UTC Offset: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones */
   UtcOffset: any;
+  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
   EmailAddress: any;
+  /** Floats that will have a value less than 0. */
   NegativeFloat: any;
+  /** Integers that will have a value less than 0. */
   NegativeInt: any;
+  /** Floats that will have a value of 0 or more. */
   NonNegativeFloat: any;
+  /** Integers that will have a value of 0 or more. */
   NonNegativeInt: any;
+  /** Floats that will have a value of 0 or less. */
   NonPositiveFloat: any;
+  /** Integers that will have a value of 0 or less. */
   NonPositiveInt: any;
+  /** A field whose value conforms to the standard E.164 format as specified in: https://en.wikipedia.org/wiki/E.164. Basically this is +17895551234. */
   PhoneNumber: any;
+  /** Floats that will have a value greater than 0. */
   PositiveFloat: any;
+  /** Integers that will have a value greater than 0. */
   PositiveInt: any;
+  /** A field whose value conforms to the standard postal code formats for United States, United Kingdom, Germany, Canada, France, Italy, Australia, Netherlands, Spain, Denmark, Sweden, Belgium, India, Austria, Portugal, Switzerland or Luxembourg. */
   PostalCode: any;
+  /** Floats that will have a value of 0 or more. */
   UnsignedFloat: any;
+  /** Integers that will have a value of 0 or more. */
   UnsignedInt: any;
+  /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
   URL: any;
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
   BigInt: any;
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
   Long: any;
+  /** A field whose value is a generic Globally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier. */
   GUID: any;
+  /** A field whose value is a hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal. */
   Hexadecimal: any;
+  /** A field whose value is a hex color code: https://en.wikipedia.org/wiki/Web_colors. */
   HexColorCode: any;
+  /** A field whose value is a CSS HSL color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#hsl()_and_hsla(). */
   HSL: any;
+  /** A field whose value is a CSS HSLA color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#hsl()_and_hsla(). */
   HSLA: any;
+  /** A field whose value is a IPv4 address: https://en.wikipedia.org/wiki/IPv4. */
   IPv4: any;
+  /** A field whose value is a IPv6 address: https://en.wikipedia.org/wiki/IPv6. */
   IPv6: any;
+  /** A field whose value is a ISBN-10 or ISBN-13 number: https://en.wikipedia.org/wiki/International_Standard_Book_Number. */
   ISBN: any;
+  /** A field whose value is a IEEE 802 48-bit MAC address: https://en.wikipedia.org/wiki/MAC_address. */
   MAC: any;
+  /** A field whose value is a valid TCP port within the range of 0 to 65535: https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_ports */
   Port: any;
+  /** A field whose value is a CSS RGB color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba(). */
   RGB: any;
+  /** A field whose value is a CSS RGBA color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba(). */
   RGBA: any;
+  /** A currency string, such as $21.25 */
   USCurrency: any;
+  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
+  /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSONObject: any;
+  /** A field whose value is an International Bank Account Number (IBAN): https://en.wikipedia.org/wiki/International_Bank_Account_Number. */
   IBAN: any;
+  /** A field whose value conforms with the standard mongodb object ID as described here: https://docs.mongodb.com/manual/reference/method/ObjectId/#ObjectId. Example: 5e5677d71bdc2ae76344968c */
   ObjectID: any;
+  /** Represents NULL values */
   Void: any;
 };
 
@@ -84,48 +120,12 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  user: User;
+  user?: Maybe<User>;
 };
 
 
 export type QueryUserArgs = {
   id?: Maybe<Scalars['Int']>;
-};
-
-export type User = {
-  __typename?: 'User';
-  id: Scalars['Int'];
-  name: Scalars['String'];
-  email: Scalars['EmailAddress'];
-  mobile?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  picture?: Maybe<Scalars['String']>;
-  about?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  Events?: Maybe<Array<Maybe<Event>>>;
-};
-
-export type Event = {
-  __typename?: 'Event';
-  id: Scalars['Int'];
-  title: Scalars['String'];
-  content: Scalars['String'];
-  location?: Maybe<Scalars['String']>;
-  published: Scalars['Boolean'];
-  host: Scalars['Int'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type EventAttendee = {
-  __typename?: 'EventAttendee';
-  userId: Scalars['Int'];
-  eventId: Scalars['Int'];
-};
-
-export type AuthPayload = {
-  __typename?: 'AuthPayload';
-  token?: Maybe<Scalars['String']>;
-  user?: Maybe<User>;
 };
 
 export type Mutation = {
@@ -176,6 +176,42 @@ export type MutationRemoveEventArgs = {
 
 export type MutationAddAttendeeArgs = {
   eventId?: Maybe<Scalars['Int']>;
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  email: Scalars['EmailAddress'];
+  mobile?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  about?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  Events?: Maybe<Array<Maybe<Event>>>;
+};
+
+export type Event = {
+  __typename?: 'Event';
+  id: Scalars['Int'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+  location?: Maybe<Scalars['String']>;
+  published: Scalars['Boolean'];
+  host: Scalars['Int'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type EventAttendee = {
+  __typename?: 'EventAttendee';
+  userId: Scalars['Int'];
+  eventId: Scalars['Int'];
+};
+
+export type AuthPayload = {
+  __typename?: 'AuthPayload';
+  token?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 
@@ -289,13 +325,13 @@ export type ResolversTypes = {
   Void: ResolverTypeWrapper<Scalars['Void']>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  User: ResolverTypeWrapper<User>;
+  Mutation: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  Event: ResolverTypeWrapper<Event>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  User: ResolverTypeWrapper<User>;
+  Event: ResolverTypeWrapper<Event>;
   EventAttendee: ResolverTypeWrapper<EventAttendee>;
   AuthPayload: ResolverTypeWrapper<AuthPayload>;
-  Mutation: ResolverTypeWrapper<{}>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -338,13 +374,13 @@ export type ResolversParentTypes = {
   Void: Scalars['Void'];
   Query: {};
   Int: Scalars['Int'];
-  User: User;
+  Mutation: {};
   String: Scalars['String'];
-  Event: Event;
   Boolean: Scalars['Boolean'];
+  User: User;
+  Event: Event;
   EventAttendee: EventAttendee;
   AuthPayload: AuthPayload;
-  Mutation: {};
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -492,7 +528,16 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  signup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationSignupArgs, never>>;
+  login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, never>>;
+  addEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationAddEventArgs, never>>;
+  updateEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationUpdateEventArgs, never>>;
+  removeEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationRemoveEventArgs, never>>;
+  addAttendee?: Resolver<Maybe<ResolversTypes['EventAttendee']>, ParentType, ContextType, RequireFields<MutationAddAttendeeArgs, never>>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -529,15 +574,6 @@ export type AuthPayloadResolvers<ContextType = any, ParentType extends Resolvers
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
-};
-
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  signup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationSignupArgs, never>>;
-  login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, never>>;
-  addEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationAddEventArgs, never>>;
-  updateEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationUpdateEventArgs, never>>;
-  removeEvent?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<MutationRemoveEventArgs, never>>;
-  addAttendee?: Resolver<Maybe<ResolversTypes['EventAttendee']>, ParentType, ContextType, RequireFields<MutationAddAttendeeArgs, never>>;
 };
 
 export type Resolvers<ContextType = any> = {
@@ -578,11 +614,11 @@ export type Resolvers<ContextType = any> = {
   ObjectID?: GraphQLScalarType;
   Void?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Event?: EventResolvers<ContextType>;
   EventAttendee?: EventAttendeeResolvers<ContextType>;
   AuthPayload?: AuthPayloadResolvers<ContextType>;
-  Mutation?: MutationResolvers<ContextType>;
 };
 
 

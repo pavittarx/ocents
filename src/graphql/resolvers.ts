@@ -1,54 +1,12 @@
-import { Resolvers, User, AuthPayload, Event, EventAttendee } from "./tsdefs";
-import { resolvers } from "graphql-scalars";
+import { resolvers as scalarResolvers} from "graphql-scalars";
 
-import { getToken } from "./../libs/utils";
+import {Resolvers} from  "./tsdefs";
 
-export const gqlResolvers: Resolvers = {
-  ...resolvers,
+import {resolvers as queryResolvers} from "./base/query";
+import {resolvers as mutationResolvers} from "./base/mutation";
 
-  Query: {
-    user: async (root, args, ctx) => {
-      return await ctx.services.users.getUserById(args);
-    },
-  },
-
-  Mutation: {
-    signup: async (root, args, ctx): Promise<User> => {
-      return await ctx.services.auth.signup(args);
-    },
-
-    login: async (root, args, ctx): Promise<AuthPayload> => {
-      return await ctx.services.auth.login(args);
-    },
-
-    addEvent: async (root, args, ctx): Promise<Event> => {
-      const token = getToken(ctx.req.get("Authorization"));
-      const payload = await ctx.services.auth.auth({ token });
-
-      return await ctx.services.events.add(
-        Object.assign({ hostId: payload.id }, args)
-      );
-    },
-
-    updateEvent: async (root, args, ctx): Promise<Event> => {
-      const token = getToken(ctx.req.get("Authorization"));
-      const payload = await ctx.services.auth.auth({ token });
-
-      return await ctx.services.events.update(
-        Object.assign({ hostId: payload.id }, args)
-      );
-    },
-
-    removeEvent: async (root, args, ctx): Promise<Event> => {
-      return ctx.services.events.remove({ id: args.id });
-    },
-
-    addAttendee: async (root, args, ctx): Promise<EventAttendee> => {
-      const token = getToken(ctx.req.get("Authorization"));
-      const payload = await ctx.services.auth.auth({ token });
-      return await ctx.services.events.addAttendee(
-        Object.assign({ userId: payload.id }, args)
-      );
-    },
-  },
+export const resolvers: Resolvers = {
+  ...scalarResolvers,
+  Query: queryResolvers,
+  Mutation: mutationResolvers
 };
