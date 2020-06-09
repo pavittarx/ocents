@@ -251,8 +251,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   UtcOffset: ResolverTypeWrapper<Scalars['UtcOffset']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
@@ -292,7 +290,9 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   User: ResolverTypeWrapper<User>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Event: ResolverTypeWrapper<Event>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   EventAttendee: ResolverTypeWrapper<EventAttendee>;
   AuthPayload: ResolverTypeWrapper<AuthPayload>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -300,8 +300,6 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  String: Scalars['String'];
-  Boolean: Scalars['Boolean'];
   DateTime: Scalars['DateTime'];
   UtcOffset: Scalars['UtcOffset'];
   EmailAddress: Scalars['EmailAddress'];
@@ -341,7 +339,9 @@ export type ResolversParentTypes = {
   Query: {};
   Int: Scalars['Int'];
   User: User;
+  String: Scalars['String'];
   Event: Event;
+  Boolean: Scalars['Boolean'];
   EventAttendee: EventAttendee;
   AuthPayload: AuthPayload;
   Mutation: {};
