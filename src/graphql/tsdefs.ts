@@ -128,6 +128,12 @@ export type QueryUserArgs = {
   id?: Maybe<Scalars['Int']>;
 };
 
+export type Payload = {
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   signup?: Maybe<User>;
@@ -157,6 +163,7 @@ export type MutationAddEventArgs = {
   content?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
   published?: Maybe<Scalars['Boolean']>;
+  payload?: Maybe<Payload>;
 };
 
 
@@ -166,6 +173,7 @@ export type MutationUpdateEventArgs = {
   content?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
   published?: Maybe<Scalars['Boolean']>;
+  payload?: Maybe<Payload>;
 };
 
 
@@ -176,6 +184,7 @@ export type MutationRemoveEventArgs = {
 
 export type MutationAddAttendeeArgs = {
   eventId?: Maybe<Scalars['Int']>;
+  payload?: Maybe<Payload>;
 };
 
 export type User = {
@@ -325,8 +334,9 @@ export type ResolversTypes = {
   Void: ResolverTypeWrapper<Scalars['Void']>;
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  Mutation: ResolverTypeWrapper<{}>;
+  Payload: Payload;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
   Event: ResolverTypeWrapper<Event>;
@@ -374,8 +384,9 @@ export type ResolversParentTypes = {
   Void: Scalars['Void'];
   Query: {};
   Int: Scalars['Int'];
-  Mutation: {};
+  Payload: Payload;
   String: Scalars['String'];
+  Mutation: {};
   Boolean: Scalars['Boolean'];
   User: User;
   Event: Event;

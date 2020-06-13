@@ -2,6 +2,12 @@ export type ID = {
   id: number;
 };
 
+type Payload = {
+  id: string;
+  name: string,
+  email: string
+}
+
 export interface Login {
   email: string;
   password: string;
@@ -25,6 +31,7 @@ export interface EventArgs {
 
 export interface UpdateEventArgs extends EventArgs {
   id: number;
+  payload: Payload
 }
 
 export interface EventAttendeeArgs {
