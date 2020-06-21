@@ -1,8 +1,8 @@
-node_modules
-# files to be ignored
-.ignore
-package-lock.json
-prisma/.env
-prisma/postgres.sql
-dist
-graphql.schema.json
+**/node_modules/
+**/package-lock.json
+
+**/dist
+server/prisma/.env
+server/graphql.schema.json
+
+frontend/.next
