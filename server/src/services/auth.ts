@@ -1,11 +1,11 @@
-import { AuthPayload, User, Event } from "../graphql/tsdefs";
+import { AuthPayload, User} from "../graphql/tsdefs";
 import prisma from "../prisma";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { AuthenticationError } from "apollo-server-express";
-import { Login, Signup, AuthToken } from "./types";
+import { Login, Signup} from "./types";
 
 export async function login(args: Login): Promise<AuthPayload> {
   const user = await prisma.users.findOne({
@@ -47,21 +47,7 @@ export async function signup(args: Signup): Promise<User> {
   return newUser;
 }
 
-export async function auth(args: AuthToken): Promise<Boolean> {
-  const payload = await jwt.decode(args.token);
-  if(!payload) throw new AuthenticationError("Invalid Token");
-
-  const user = await prisma.users.findOne({
-    where: {
-      id: payload.id,
-    },
-  });
-  const verifiedPlayLoad = await jwt.verify(args.token, user.password);
-  return verifiedPlayLoad? verifiedPlayLoad: new AuthenticationError("Invalid Token");
-}
-
 export default {
   login: login,
-  signup: signup,
-  auth: auth
+  signup: signup
 }

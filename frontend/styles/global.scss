@@ -1,0 +1,15 @@
+@use "normalize";
+@use "colors";
+
+// Global styles for all of the app.
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Muli", Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+}
