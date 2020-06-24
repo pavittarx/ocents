@@ -3,7 +3,7 @@ import styles from "@/styles/pages/index.module.scss";
 
 function Index() {
   return (
-    <div className={ styles.index }>
+    <div className={ styles.indexStyles }>
       <h1> Ocents </h1>
       <img src="/illustration.svg" />
       <p> Thank you for stopping by.  </p>
