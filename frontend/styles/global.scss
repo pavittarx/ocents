@@ -10,11 +10,15 @@ body {
   font-weight: 500;
 }
 
+svg {
+  font-family: initial;
+}
+
 a {
   text-decoration: none;
 }
 
-.icon{
+.icon {
   width: 24px;
   height: 24px;
   fill: none;

@@ -1,7 +1,13 @@
+.topbar{
+  display: block;
+  padding: 15px 20px;
+}
+
 .sidebar {
   width: 50px;
   vertical-align: middle;
   overflow-x: hidden;
+  margin-left: 5px;
 
 
   .buttons {
@@ -11,23 +17,15 @@
 
     padding: 10px 20px;
     border-radius: 20px;
-    width: 120px;
+    width: 150px;
 
     &:hover{
-      background: grey;
+      background: rgba(2,2,2,0.8);
       color: #fff;
     }
 
     span {
       margin-left: 15px;
     }
-  }
-
-  // Style adjustments for icons
-
-  :global(.discussion-icon){
-    stroke-width: 2.8;
-    width: 26px;
-    margin-left: 0px;
   }
 }
