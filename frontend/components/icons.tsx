@@ -1,4 +1,9 @@
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
+
+const variants = {
+  show: { opacity: 1 },
+  hide: { opacity: 0 },
+};
 
 export function MenuIcon() {
   return (
@@ -9,10 +14,35 @@ export function MenuIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="icon menu-icon"
+      initial="hide"
+      animate="show"
+      exit="hide"
+      variants={variants}
     >
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
       <line x1="3" y1="18" x2="21" y2="18"></line>
+    </motion.svg>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <motion.svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="icon close-icon"
+      initial="hide"
+      animate="show"
+      exit="hide"
+      variants={variants}
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
     </motion.svg>
   );
 }
@@ -69,19 +99,42 @@ export function UpdateIcon() {
   );
 }
 
-export function CloseIcon() {
+export function ChevronRight() {
   return (
     <motion.svg
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="icon close-icon"
     >
-      <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
+      <path
+        d="M9 18L15 12L9 6"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </motion.svg>
+  );
+}
+
+export function ChevronLeft() {
+  return (
+    <motion.svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+    >
+      <path
+        d="M15 18L9 12L15 6"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </motion.svg>
   );
 }
