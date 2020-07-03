@@ -15,6 +15,7 @@ const Sidebar = styled(motion.div)`
   grid-column: 1;
   z-index: 10;
   background: #f9ffff;
+  padding-left: 5px;
 `;
 
 const Button = styled(motion.div)`
@@ -22,7 +23,7 @@ const Button = styled(motion.div)`
   align-items: center;
   place-items: center;
 
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 20px;
   width: 150px;
 

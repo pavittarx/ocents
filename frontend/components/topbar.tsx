@@ -10,6 +10,8 @@ const Topbar = styled(motion.div)`
   padding: 10px;
   text-align: center;
 
+  background: #fff;
+
   svg,
   span {
     vertical-align: middle;
