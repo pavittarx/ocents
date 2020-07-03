@@ -14,7 +14,7 @@ const Sidebar = styled(motion.div)`
   grid-row: 1/3;
   grid-column: 1;
   z-index: 10;
-  background: white;
+  background: #f9ffff;
 `;
 
 const Button = styled(motion.div)`
