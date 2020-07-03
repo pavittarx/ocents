@@ -1,14 +1,20 @@
-.topbar{
+.topbar {
   display: block;
   padding: 15px 20px;
 }
 
-.sidebar {
+.show {
+  width: 500px;
+}
+
+.hide {
   width: 50px;
+}
+
+.sidebar {
   vertical-align: middle;
   overflow-x: hidden;
   margin-left: 5px;
-
 
   .buttons {
     display: flex;
@@ -19,8 +25,8 @@
     border-radius: 20px;
     width: 150px;
 
-    &:hover{
-      background: rgba(2,2,2,0.8);
+    &:hover {
+      background: rgba(2, 2, 2, 0.8);
       color: #fff;
     }
 

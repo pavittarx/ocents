@@ -6,10 +6,34 @@ import Document, {
   DocumentContext,
 } from "next/document";
 
+import { ServerStyleSheet } from "styled-components";
+
 class HTMLDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+  // Source:  https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
+  static async getInitialProps(ctx) {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
   }
 
   render() {
@@ -21,7 +45,6 @@ class HTMLDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" type="image/x-icon" href="favicon.ico" />
-          <link rel="stylesheet" href="/styles/normalize.css" />
         </Head>
         <body>
           <Main />
