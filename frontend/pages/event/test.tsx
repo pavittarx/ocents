@@ -6,18 +6,24 @@ import TopBar from "@/components/topbar";
 import SideBar from "@/components/sidebar";
 import Grid from "@/containers/grid";
 
+
+
 const Main = styled(motion.div)`
   grid-column: 2/6;
   grid-row: 2/3;
   padding: 13px 15px;
 
   .event-container {
-    background: #fff;
     padding: 20px;
-    border-radius: 10px;
+    margin: 5px;
+    /* border-radius: 10px;
     line-height: 1.1;
     box-shadow: inset 0 0 2px 1px rgb(218, 214, 214);
-    opacity: 0.75;
+    opacity: 0.75; */
+
+    background: #ffffff;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
 
     header {
       font-size: 20px;
@@ -31,6 +37,9 @@ const Main = styled(motion.div)`
   }
 `;
 
+const EventButton = styled(motion.div)`
+`;
+
 export default () => {
   const [toggle, setToggle] = useState(false);
 
@@ -40,11 +49,21 @@ export default () => {
       <SideBar />
       <Main>
         <section className="event-container">
-          <header>title of the event</header>
-          <main>
-            It 
-          </main>
+          <header>Title</header>
+          <main>It</main>
         </section>
+
+        <motion.div> 
+          <EventButton>
+
+          </EventButton>
+          <EventButton>
+
+          </EventButton>
+          <EventButton>
+
+          </EventButton>
+        </motion.div>
       </Main>
     </Grid>
   );

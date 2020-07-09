@@ -7,14 +7,16 @@ body {
   box-sizing: border-box;
   font-family: "Muli", Helvetica, sans-serif;
   font-weight: 500;
-}
-
-svg {
-  font-family: initial;
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
+}
+
+svg{
+  font-size: initial;
+  box-sizing: none;
 }
 
 .icon {

@@ -5,25 +5,43 @@ import styled from "styled-components";
 import {
   UpdateIcon,
   DiscussionIcon,
-  SubscribeIcon,
   ChevronLeft,
   ChevronRight,
 } from "@/components/icons";
 
 const Sidebar = styled(motion.div)`
-  grid-row: 1/3;
+  grid-row: 2/3;
   grid-column: 1;
-  z-index: 10;
-  background: #f9ffff;
-  padding-left: 5px;
+
+  background: #fff;
+  padding-left: 3px;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  .toggle-container,
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 10px;
+  }
+
+  .toggle-container {
+    padding-right: ${(props) => (!props.toggle ? 0 : "15px")};
+    align-items: ${(props) => (!props.toggle ? "center" : "flex-end")};
+  }
 `;
 
 const Button = styled(motion.div)`
   display: flex;
   align-items: center;
-  place-items: center;
+  justify-items: center;
 
   padding: 10px 15px;
+  margin-top: 2.5px;
   border-radius: 20px;
   width: 150px;
 
@@ -51,29 +69,22 @@ export default () => {
       }}
     >
       <motion.div
-        style={{
-          minHeight: 50,
-          display: "flex",
-          padding: "0px 10px",
-          alignItems: "center",
-          justifyItems: "center",
-          justifyContent: !toggle? "center" : "flex-end"
-        }}
+        className="toggle-container"
         onClick={() => {
           setToggle(!toggle);
         }}
       >
         {!toggle ? <ChevronRight /> : <ChevronLeft />}
       </motion.div>
-      <Button>
-        <UpdateIcon /> <span> Updates </span>
-      </Button>
-      <Button>
-        <DiscussionIcon /> <span> Discussions </span>
-      </Button>
-      <Button>
-        <SubscribeIcon /> <span> Subscribe </span>
-      </Button>
+
+      <motion.div className="button-container">
+        <Button>
+          <UpdateIcon /> <span> Updates </span>
+        </Button>
+        <Button>
+          <DiscussionIcon /> <span> Discussions </span>
+        </Button>
+      </motion.div>
     </Sidebar>
   );
 };
