@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import styled from "styled-components";
+
+
 const Placeholder = styled.div`
   display: block;
   text-align: center;

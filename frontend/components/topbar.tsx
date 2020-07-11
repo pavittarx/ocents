@@ -13,7 +13,7 @@ const Topbar = styled(motion.div)`
   justify-content: space-between;
   align-items: center;
 
-  box-shadow: -3px 0px 1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: -3px 0px 1px 1px rgba(0, 0, 0, 0.05);
   z-index: 12;
 
   div {

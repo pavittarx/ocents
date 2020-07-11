@@ -21,9 +21,10 @@ const Main = styled(motion.div)`
     box-shadow: inset 0 0 2px 1px rgb(218, 214, 214);
     opacity: 0.75; */
 
-    background: #ffffff;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    background: #fff;
+    border-radius: 16px;
+
 
     header {
       font-size: 20px;

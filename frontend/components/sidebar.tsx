@@ -46,7 +46,7 @@ const Button = styled(motion.div)`
   width: 150px;
 
   &:hover {
-    background: rgba(2, 2, 2, 0.8);
+    background: rgba(2, 2, 2, 0.75);
     color: #fff;
   }
 
