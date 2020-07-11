@@ -1,6 +1,15 @@
 import { Event, EventAttendee } from "../graphql/tsdefs";
 import prisma from "../prisma";
 import { EventArgs, UpdateEventArgs, ID, EventAttendeeArgs } from "./types";
+import { ApolloError } from "apollo-server-express";
+
+export async function getEvent(args: ID): Promise<Event[]> {
+  const event = await prisma.events.findMany({});
+
+  if (!event) throw new ApolloError("The event does not exist.");
+
+  return event;
+}
 
 export async function add(args: EventArgs): Promise<Event> {
   const event = await prisma.events.create({
@@ -67,6 +76,7 @@ export async function addAttendee(
 }
 
 export default {
+  getEvent,
   add,
   remove,
   update,

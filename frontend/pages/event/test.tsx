@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ApolloProvider } from '@apollo/react-hooks';
+
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
