@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ApolloProvider } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import TopBar from "@/components/topbar";
 import SideBar from "@/components/sidebar";
 import Grid from "@/containers/grid";
+import { ALL_EVENTS } from "@/gql/queries";
 
 
 
@@ -45,6 +46,15 @@ const EventButton = styled(motion.div)`
 
 export default () => {
   const [toggle, setToggle] = useState(false);
+  const { loading, error, data } = useQuery(ALL_EVENTS);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {JSON.stringify(error)}</p>;
+  }
 
   return (
     <Grid>
@@ -54,6 +64,11 @@ export default () => {
         <section className="event-container">
           <header>Title</header>
           <main>It</main>
+          {/* {data.events.map((data) => (
+                    <ul key={data.title}>
+                        <li>{data.content}</li>
+                    </ul>
+                ))} */}
         </section>
 
         <motion.div> 
