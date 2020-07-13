@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from 'urql';
+
 
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -7,7 +8,8 @@ import styled from "styled-components";
 import TopBar from "@/components/topbar";
 import SideBar from "@/components/sidebar";
 import Grid from "@/containers/grid";
-import { ALL_EVENTS } from "@/gql/queries";
+import ALL_EVENT from "@/gql/queries";
+
 
 
 
@@ -46,31 +48,28 @@ const EventButton = styled(motion.div)`
 
 export default () => {
   const [toggle, setToggle] = useState(false);
-  const { loading, error, data } = useQuery(ALL_EVENTS);
+  const [result, reexecuteQuery] = useQuery({
+    query: ALL_EVENT,
+  });
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {JSON.stringify(error)}</p>;
-  }
+  const { data, fetching, error } = result;
+  if (fetching) return <p>Loading...</p>;
+  if (error) return <p>Oh no... {error.message}</p>;
 
   return (
     <Grid>
       <TopBar />
       <SideBar />
       <Main>
+      {data.events.map(event => (
+        
         <section className="event-container">
-          <header>Title</header>
-          <main>It</main>
-          {/* {data.events.map((data) => (
-                    <ul key={data.title}>
-                        <li>{data.content}</li>
-                    </ul>
-                ))} */}
+          <header>{event.title}</header>
+          <main>{event.content}</main>
+          
         </section>
-
+      ))}
+        
         <motion.div> 
           <EventButton>
 

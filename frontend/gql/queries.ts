@@ -1,11 +1,10 @@
-import gql from 'graphql-tag';
-
-export const ALL_EVENTS = gql`
-    query getEvent {
-        getEvent {
+const ALL_EVENTS = `
+    query{
+        events {
             title
             content
         }
     }
 `;
 
+export default ALL_EVENTS;
