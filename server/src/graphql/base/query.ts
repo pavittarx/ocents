@@ -5,6 +5,7 @@ export const typeDefs = gql`
   type Query {
     user(id: Int): User
     events: [Event]
+    event(id: Int): Event
   }
 `;
 
@@ -14,6 +15,12 @@ export const resolvers: QueryResolvers = {
   },
 
   events: async (root, args, ctx) => {
-    return await ctx.services.events.getEvent();
+    return await ctx.services.events.getEvents();
+  },
+
+  event: async (root, args, ctx) => {
+    return await ctx.services.events.getEventById(args);
   }
+
+ 
 };

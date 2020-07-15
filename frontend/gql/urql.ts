@@ -1,7 +1,6 @@
 import { createClient } from 'urql';
 
 export const client = createClient({
-  url: 'https://ocents.herokuapp.com/api',
+  url: 'http://localhost:4000/api',
 });
-
 
