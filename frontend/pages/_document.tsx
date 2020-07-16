@@ -10,7 +10,7 @@ import { ServerStyleSheet } from "styled-components";
 
 class HTMLDocument extends Document {
   // Source:  https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
