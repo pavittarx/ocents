@@ -1,4 +1,4 @@
-import { getEvent, getEvents } from "@/gql/queries";
+import { getEvent, getEvents } from "@/graphql/queries";
 import { useState } from "react";
 
 

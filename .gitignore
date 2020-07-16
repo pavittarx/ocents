@@ -6,3 +6,4 @@ server/prisma/.env
 server/graphql.schema.json
 
 frontend/.next
+.env
