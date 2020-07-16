@@ -1,4 +1,4 @@
-import {client} from "@/gql/urql";
+import {client} from "@/graphql/client";
 
 const eventQuery = `
     query ($id: Int!){
