@@ -122,10 +122,16 @@ export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
   events?: Maybe<Array<Maybe<Event>>>;
+  event?: Maybe<Event>;
 };
 
 
 export type QueryUserArgs = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryEventArgs = {
   id?: Maybe<Scalars['Int']>;
 };
 
@@ -542,6 +548,7 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
   events?: Resolver<Maybe<Array<Maybe<ResolversTypes['Event']>>>, ParentType, ContextType>;
+  event?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<QueryEventArgs, never>>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
