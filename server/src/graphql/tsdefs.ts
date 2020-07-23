@@ -121,10 +121,17 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
+  events?: Maybe<Array<Maybe<Event>>>;
+  event?: Maybe<Event>;
 };
 
 
 export type QueryUserArgs = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryEventArgs = {
   id?: Maybe<Scalars['Int']>;
 };
 
@@ -296,6 +303,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  String: ResolverTypeWrapper<Scalars['String']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   UtcOffset: ResolverTypeWrapper<Scalars['UtcOffset']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
@@ -335,9 +344,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Payload: Payload;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Mutation: ResolverTypeWrapper<{}>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   User: ResolverTypeWrapper<User>;
   Event: ResolverTypeWrapper<Event>;
   EventAttendee: ResolverTypeWrapper<EventAttendee>;
@@ -346,6 +353,8 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  String: Scalars['String'];
+  Boolean: Scalars['Boolean'];
   DateTime: Scalars['DateTime'];
   UtcOffset: Scalars['UtcOffset'];
   EmailAddress: Scalars['EmailAddress'];
@@ -385,9 +394,7 @@ export type ResolversParentTypes = {
   Query: {};
   Int: Scalars['Int'];
   Payload: Payload;
-  String: Scalars['String'];
   Mutation: {};
-  Boolean: Scalars['Boolean'];
   User: User;
   Event: Event;
   EventAttendee: EventAttendee;
@@ -540,6 +547,8 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, never>>;
+  events?: Resolver<Maybe<Array<Maybe<ResolversTypes['Event']>>>, ParentType, ContextType>;
+  event?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<QueryEventArgs, never>>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
