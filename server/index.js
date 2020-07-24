@@ -1,15 +1,11 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 const routes = require("./routes");
 
 const app = express();
 
-app
-    .use(cors())
-    .use(cookieParser())
-    .use(routes);
+app.use(cors()).use(express.urlencoded({extended: 'false'})).use(express.json()).use(routes);
 
 app.get('/', function (req, res) {
     res.send('hello world')

@@ -24,5 +24,5 @@ db.once("open", () => {
 
 
 module.exports = { 
-    users: mongoose.model("Users", userSchema)
+    Users: mongoose.model("Users", userSchema)
 }
